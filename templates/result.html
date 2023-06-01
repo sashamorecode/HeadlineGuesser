@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Guess Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        
+        h2 {
+            color: #555;
+            margin-top: 0;
+        }
+        
+        p {
+            color: #777;
+        }
+        
+        .result {
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .result p {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Guess Result</h1>
+        <h2>Headline: {{ headline.headline }}</h2>
+        <p>Actual Date: {{ headline.date }}</p>
+        <p>Your Guess: {{ guess_date }}</p>
+        <div class="result">
+            <p>Days Off: {{ days_off }}</p>
+        </div>
+        <button onclick="window.location.href='/';">
+            Play Again
+        </button>
+    </div>
+</body>
+</html>
