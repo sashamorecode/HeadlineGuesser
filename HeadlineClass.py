@@ -52,4 +52,4 @@ def guess():
     return render_template('result.html', headline=last_headline, guess_date=guess_date, days_off=days_off)
 
 if __name__ == '__main__':
-    app.run(host='209.38.248.210', port=5000)
+    app.run(host='127.0.0.1', port=5000)
