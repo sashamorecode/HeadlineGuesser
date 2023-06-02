@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 from flask import Flask, render_template, request
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
 import random
 import json
 
@@ -14,13 +14,15 @@ class HeadlineLoader:
             for line in f:
                 try:
                     data = json.loads(line)
-                    headline = {
-                        "id": -1,
-                        "link": data["link"],
-                        "headline": data["headline"],
-                        "date": datetime.strptime(data["date"], "%Y-%m-%d").date()
-                    }
-                    self.headlines.append(headline)
+                    if data["category"] in ["POLITICS", "QUEER VOICES", "BLACK VOICES", "TECH", "BUSINESS"]:
+                        headline = {
+                            "id": -1,
+                            "link": data["link"],
+                            "headline": data["headline"],
+                            "date": datetime.strptime(data["date"], "%Y-%m-%d").date()
+                        }
+
+                        self.headlines.append(headline)
                 except ValueError:
                     pass
 
@@ -64,12 +66,13 @@ def guess():
     guess_date = request.form.get('date')
     headline = request.form.get('headline')
     actual_date = request.form.get('actual_date')
+   
     try:
         actual_date = datetime.strptime(actual_date, "%Y-%m-%d").date()
         guess_date = datetime.strptime(guess_date, "%Y-%m-%d").date()
     except:
-        guess_date = datetime.strftime("2002-02-02", "%Y-%m-%d").date()
-        actual_date = datetime.strftime("2222-02-02", "%Y-%m-%d").date()
+        guess_date = date(2002, 12, 31)
+        actual_date = date(2022, 12, 31)
     
     days_off = abs((guess_date - actual_date).days)
     return render_template('result.html', headline=headline, actual_date=actual_date, guess_date=guess_date, days_off=days_off)
