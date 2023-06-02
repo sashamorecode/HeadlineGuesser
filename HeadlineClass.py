@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 from flask import Flask, render_template, request
 from datetime import datetime, timedelta
 import random
@@ -14,6 +15,7 @@ class HeadlineLoader:
                 try:
                     data = json.loads(line)
                     headline = {
+                        "id": -1,
                         "link": data["link"],
                         "headline": data["headline"],
                         "date": datetime.strptime(data["date"], "%Y-%m-%d").date()
@@ -24,7 +26,9 @@ class HeadlineLoader:
 
     def get_random_headline(self):
         if self.headlines:
-            self.last_headline = random.choice(self.headlines)
+            i = random.randrange(0,len(self.headlines))
+            self.headlines[i]['id'] = i
+            self.last_headline = self.headlines[i]
             return self.last_headline
         else:
             return None
@@ -33,7 +37,20 @@ class HeadlineLoader:
             return None
         else:
             return self.last_headline
-
+    def get_headline_by_headline(self, headline):
+        for item in self.headlines:
+            if item["headline"] == headline:
+                return item
+            return None
+        
+    def get_headline_by_id(self, id):
+        for item in self.headlines:
+            #print("should match at some point", item.get('id'), id)
+            if item.get('id') == id:
+                print("found Item")
+                return item
+        print("Failed to find headline")
+        return self.last_headline
 json_file = "News_Category_Dataset_v3.json"
 headline_loader = HeadlineLoader(json_file)
 
@@ -44,12 +61,18 @@ def index():
 
 @app.route('/guess', methods=['POST'])
 def guess():
-    guess_date = request.form['date']
-    guess_date = datetime.strptime(guess_date, "%Y-%m-%d").date()
-    last_headline = headline_loader.get_last_headline()
-    actual_date = last_headline['date']
+    guess_date = request.form.get('date')
+    headline = request.form.get('headline')
+    actual_date = request.form.get('actual_date')
+    try:
+        actual_date = datetime.strptime(actual_date, "%Y-%m-%d").date()
+        guess_date = datetime.strptime(guess_date, "%Y-%m-%d").date()
+    except:
+        guess_date = datetime.strftime("2002-02-02", "%Y-%m-%d").date()
+        actual_date = datetime.strftime("2222-02-02", "%Y-%m-%d").date()
+    
     days_off = abs((guess_date - actual_date).days)
-    return render_template('result.html', headline=last_headline, guess_date=guess_date, days_off=days_off)
+    return render_template('result.html', headline=headline, actual_date=actual_date, guess_date=guess_date, days_off=days_off)
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=5000)
