@@ -8,15 +8,15 @@ This link will eventually be dead when my free hosting credits expire
 # Running the game locally
 to run on linux simply make the HeadlineClass.py an executable using
 ```bash
-chmod +x HeadlineClass.py
+chmod +x main.py
 ```
 Then 
 ```
-./HeadlineClass.py
+./main.py
 ```
 Or simply
 ```
-python/py/python3 HeadlineClass.py
+python/py/python3 main.py
 ```
 
 # Requirements 
