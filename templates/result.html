@@ -40,19 +40,33 @@
         .result p {
             margin-bottom: 10px;
         }
+
+	input[type="submit"] {
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }	
+
+
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Guess Result</h1>
-        <h2>Headline: {{ headline.headline }}</h2>
-        <p>Actual Date: {{ headline.date }}</p>
+        <h2>Headline: {{ headline }}</h2>
+        <p>Actual Date: {{ actual_date }}</p>
         <p>Your Guess: {{ guess_date }}</p>
         <div class="result">
             <p>Days Off: {{ days_off }}</p>
         </div>
         <button onclick="window.location.href='/';">
-            Play Again
+           <input type="submit" value="Play Again">
         </button>
     </div>
 </body>
