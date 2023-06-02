@@ -3,6 +3,7 @@ Simple game where the goal is to guess the correct date for a given headline
 
 # Live Preview of game:
 http://209.38.248.210:80
+This link will eventually be dead when my free hosting credits expire
 
 # Running the game locally
 to run on linux simply make the HeadlineClass.py an executable using
