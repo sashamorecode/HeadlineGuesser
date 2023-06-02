@@ -75,6 +75,8 @@
             <label for="date">Select a date:</label>
             <input type="date" id="date" name="date" required>
             <br>
+            <input type="hidden" id="headline" name="headline" value="{{ headline.headline }}">
+            <input type="hidden" id="actual_date" name="actual_date" value="{{ headline.date }}">
             <input type="submit" value="Submit">
         </form>
     </div>
