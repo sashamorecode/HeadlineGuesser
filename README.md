@@ -1,7 +1,10 @@
 # HeadlineGuesser
 Simple game where the goal is to guess the correct date for a given headline
 
-# Running the game
+# Live Preview of game:
+http://209.38.248.210:80
+
+# Running the game locally
 to run on linux simply make the HeadlineClass.py an executable using
 ```bash
 chmod +x HeadlineClass.py
