@@ -1,71 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+    
     <title>Random Article</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            margin: 0;
-            padding: 20px;
-        }
-        
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            background-color: #fff;
-            padding: 20px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        
-        h1 {
-            color: #333;
-            text-align: center;
-        }
-        
-        h2 {
-            color: #555;
-            margin-top: 0;
-        }
-        
-        p {
-            color: #777;
-        }
-        
-        form {
-            margin-top: 20px;
-            text-align: center;
-        }
-        
-        label {
-            display: block;
-            margin-bottom: 10px;
-            font-weight: bold;
-        }
-        
-        input[type="text"] {
-            padding: 10px;
-            font-size: 16px;
-            border-radius: 4px;
-            border: 1px solid #ccc;
-            width: 100%;
-            box-sizing: border-box;
-        }
-        
-        input[type="submit"] {
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: #4CAF50;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        
-        input[type="submit"]:hover {
-            background-color: #45a049;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <div class="container">
@@ -77,8 +15,13 @@
             <br>
             <input type="hidden" id="headline" name="headline" value="{{ headline.headline }}">
             <input type="hidden" id="actual_date" name="actual_date" value="{{ headline.date }}">
+            <input type="hidden" id="link" name="link" value="{{ headline.link }}">
+            <input type="hidden" id="link" name="link" value="{{ headline.highscore }}">
             <input type="submit" value="Submit">
         </form>
     </div>
 </body>
+<footer>
+    <p>data sourced from <a href="https://www.kaggle.com/datasets/rmisra/news-category-dataset" target="_blank" rel="noopener noreferrer">kaggle</a></p>
+</footer>
 </html>

@@ -1,73 +1,37 @@
 <!DOCTYPE html>
 <html>
 <head>
+    
     <title>Guess Result</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            margin: 0;
-            padding: 20px;
-        }
-        
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            background-color: #fff;
-            padding: 20px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        
-        h1 {
-            color: #333;
-            text-align: center;
-        }
-        
-        h2 {
-            color: #555;
-            margin-top: 0;
-        }
-        
-        p {
-            color: #777;
-        }
-        
-        .result {
-            margin-top: 20px;
-            text-align: center;
-        }
-        
-        .result p {
-            margin-bottom: 10px;
-        }
-
-	input[type="submit"] {
-            font-size: 16px;
-            background-color: #4CAF50;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-        }
-
-        input[type="submit"]:hover {
-            background-color: #45a049;
-        }	
-
-
-    </style>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <div class="container">
         <h1>Guess Result</h1>
-        <h2>Headline: {{ headline }}</h2>
+        
+        <h2>
+            Headline: <a href="{{ link }}" target="_blank" rel="noopener noreferrer"> {{ headline }} </a>
+        </h2>
+        
         <p>Actual Date: {{ actual_date }}</p>
         <p>Your Guess: {{ guess_date }}</p>
+        
         <div class="result">
             <p>Days Off: {{ days_off }}</p>
         </div>
-        <button onclick="window.location.href='/';">
-           <input type="submit" value="Play Again">
-        </button>
+        
+        <div class="score">
+            {{ score_text }} <br>
+            {{ prior_score_text }}
+        </div>
+            <div class="but">
+            <button onclick="window.location.href='/game';">
+                <input type="submit" value="Play Again">
+            </button>
+        </div>
     </div>
 </body>
+<footer>
+    <p>data sourced from <a href="https://www.kaggle.com/datasets/rmisra/news-category-dataset" target="_blank" rel="noopener noreferrer">kaggle</a></p>
+</footer>
 </html>
