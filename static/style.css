@@ -107,3 +107,8 @@ input[type="text"] {
 .score:hover {
     color: #7418ca;
 }
+
+li.headline-item {
+    cursor: move;
+    list-style-type: none;
+}

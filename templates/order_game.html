@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Headline Reordering</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    
+    
+    <style>
+        ul {
+            list-style-type: none;
+            padding: 0;
+            text-align: center;
+        }
+
+        li {
+            background-color: #f4f4f4;
+            padding: 10px;
+            margin-bottom: 5px;
+            cursor: move;
+            text-align: center;
+        }
+
+        .success {
+            background-color: green;
+        }
+
+        .error {
+            background-color: red;
+        }
+
+        .headline-link {
+            text-decoration: none;
+            color: #0000EE;
+            display: none;
+            pointer-events: none; /* Disable pointer events to prevent clicking */
+            text-align: center;
+        }
+
+        .headline-text {
+            text-align: center;
+            display: inline-block; /* Display the headline text as inline block */
+        }
+
+        .publishing-date {
+            float: right;
+            font-size: 12px;
+            display: none; /* Hide the publishing dates by default */
+        }
+    </style>
+    <script>
+        $(function() {
+            $("ul#headlines").sortable({
+                update: function(event, ui) {
+                    var orderedIds = [];
+                    $("ul#headlines li").each(function() {
+                        orderedIds.push([parseInt($(this).attr('id')), Date.parse($(this).attr('date'))]);
+                    });
+                    $("#orderInput").val(JSON.stringify(orderedIds));
+                }
+            });
+
+            $("ul#headlines").disableSelection();
+
+            $("#submitButton").click(function() {
+                var orderedIds = JSON.parse($("#orderInput").val());
+
+                $.ajax({
+                    url: '/order-game-guess',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(orderedIds),
+                    success: function(response) {
+                        console.log(response);
+                        if (response.success) {
+                            $("body").removeClass("error");
+                            $("body").addClass("success");
+                            showHyperlinksAndDates(); 
+                            
+                        } else {
+                            $("body").removeClass("success");
+                            $("body").addClass("error");
+                            setTimeout(function() {
+                                $("body").removeClass("error");
+                            }, 3000);
+                        }
+                    }
+                });
+            });
+
+            $("#refreshButton").click(function() {
+                location.reload();
+            });
+            function showHyperlinksAndDates() {
+                $(".headline-link").css("pointer-events", "auto"); // Enable pointer events for hyperlinks
+                $(".headline-link").show();
+                $(".publishing-date").show(); // Show the publishing dates
+            }
+            
+        });
+    </script>
+</head>
+<body>
+    <h1>Order the Headlines</h1>
+    <p>in chronologically acending order</p>
+    <ul id="headlines">
+        {% for headline in headlines %}
+        <li id="{{ headline.id }}" date="{{ headline.date }}">
+            <span class="headline-text">{{ headline.headline }}</span>
+            <a class="headline-link" href="{{ headline.link }}">[Read more]</a>
+            <span class="publishing-date">{{ headline.date }}</span>
+        </li>
+        {% endfor %}
+    </ul>
+    <input type="hidden" id="orderInput">
+    <button id="submitButton">Submit Order</button>
+    <a href="{{url}}"><button>New Game</button></a>
+</body>
+<footer>
+    <p>data sourced from <a href="https://www.kaggle.com/datasets/rmisra/news-category-dataset" target="_blank" rel="noopener noreferrer">kaggle</a></p>
+    <p>Articles are form 2012 to 2022 published on HuffPost.</p>
+</footer>
+</html>

@@ -6,7 +6,10 @@
 </head>
 <body>
     <h1>Welcome Crono Games</h1>
-    <a href="{{ url_for('game') }}"> <div class="center-text">1. Guess the Date</div></a>
-    <a href=""> <div class="center-text">2. Guess which was first</div></a>
+    <a href="{{ url_for('game') }}"> <div class="center-text">1. CronoGuesser</div></a>
+    <a href="{{ url_for('order_game') }}"> <div class="center-text">2. CronoOrder Easy (2 articles)</div></a>
+    <a href="{{ url_for('order_game_medium') }}"> <div class="center-text">3. CronoOrder Medium (3 articles)</div></a>
+    <a href="{{ url_for('order_game_hard') }}"> <div class="center-text">4. CronoOrder Hard (5 articles)</div></a>
+    <a href="{{ url_for('order_game_ultra') }}"> <div class="center-text">5. CronoOrder Ultra (7 articles)</div></a>
 </body>
 </html>
