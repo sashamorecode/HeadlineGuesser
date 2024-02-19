@@ -11,10 +11,12 @@ to run on linux simply make the HeadlineClass.py an executable using
 Or simply
 ```bash
 python3 -m flask --app HeadlineClass run
-or
-flask --app HeadlineClass run
-if you have flask in your PATH
 ```
+or
+```bash
+flask --app HeadlineClass run
+```
+if you have flask in your PATH
 
 # Requirements 
 1. Flask
