@@ -8,7 +8,6 @@ This link will eventually be dead when my free hosting credits expired)
 # Running the game locally
 to run on linux simply make the HeadlineClass.py an executable using
 
-Or simply
 ```bash
 python3 -m flask --app HeadlineClass run
 ```
