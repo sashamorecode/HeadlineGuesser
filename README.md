@@ -2,7 +2,7 @@
 Simple game where the goal is to guess the correct date for a given headline
 
 # Live Preview of game:
-http://209.38.248.210:80 <- (currently offline becuse my free digital ocean credits exipred)
+~~http://209.38.248.210:80~~ <- (currently offline becuse my free digital ocean credits exipred)
 This link will eventually be dead when my free hosting credits expired)
 
 # Running the game locally
